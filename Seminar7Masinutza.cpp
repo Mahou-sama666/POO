@@ -7,6 +7,7 @@ private:
 	std::string NrInmatriculare;
 	static int Total_masini;
 public:
+	//Setteri
 	void setMarca(std::string marca) {
 		this->marca = marca;
 	}
@@ -23,6 +24,7 @@ public:
 		Total_masini = m;
 	}
 
+	//Getteri
 	std::string getMarca() {
 		return marca;
 	}
@@ -39,9 +41,25 @@ public:
 		return Total_masini;
 	}
 
+	//Constructori
 	Masinutza() {
 		Total_masini++;
 	}
+
+	Masinutza(const Masinutza& m) {
+		marca = m.marca;
+		model = new char[strlen(m.model) + 1];
+		strcpy_s(model, strlen(m.model) + 1, m.model);
+		NrInmatriculare = m.NrInmatriculare;
+		Total_masini++;
+	}
+
+	//Destructor
+	~Masinutza() {
+		delete[] model;
+	}
+
+
 };
 
 int Masinutza::Total_masini = 0;
