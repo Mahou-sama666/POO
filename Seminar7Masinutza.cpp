@@ -59,6 +59,26 @@ public:
 		delete[] model;
 	}
 
+	//Overload Op
+	Masinutza& operator=(const Masinutza& m){
+		if(model) delete[] model;
+		marca = m.marca;
+		model = new char[strlen(m.model) + 1];
+		strcpy_s(model, strlen(m.model) + 1, m.model);
+		NrInmatriculare = m.NrInmatriculare;
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Masinutza& m){
+	os<<m.marca<<' '<<m.model<<' '<<m.NrInmatriculare<<'\n'<<m.Total_masini;
+    return os;
+	}
+
+	friend std::istream& operator>>(std::istream& is, Masinutza& m){
+    is>>m.marca>>m.model>>m.NrInmatriculare;
+	Masinutza::Total_masini++;
+    return is;
+	}
+
 
 };
 
