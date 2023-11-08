@@ -1,7 +1,7 @@
-#include "math_functions.h"
-#include "operators.h"
-#include "checker.h"
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
+#include "math_functions.h"
+#include "checker.h"
 #include "calculator.h"
 //#include <iostream>
 #include <cstring>
@@ -12,33 +12,29 @@ struct solutii{
 class Equation{
 private:
     char Unk;
-    double a, b, c, d;
+    double* params;  //posibil modif in vector double* param = new double[4]
     int  degree;
 public:
+
 //Constructori
-    Equation(){}
-    Equation(int degree, char Unk, double b, double c, double d):a(0),b(b),c(c), d(d), degree(degree){}
-    Equation(int degree, char Unk, double a, double b, double c, double d): Unk(Unk), a(a),b(b),c(c),d(d){}
+    Equation();
+    Equation(int degree, char Unk, double* params);
     Equation(const Equation& e);
+    ~Equation();
 //Getteri
-    char getUnk(){ return Unk;}
-    double getA(){ return a;}
-    double getB(){ return b;}
-    double getC(){ return c;}
-    double getD(){ return d;}
-    int getdegree(){ return degree;}
+    char getUnk();
+    double* getParams();
+    int getdegree();
 //Setteri
     void setUnk(char Unk);
-    void setA(double a);
-    void setB(double b);
-    void setC(double c);
-    void setD(double d);
+    void setParams(double *_params);
     void setDegree(int degree);
 //Overloads
     friend std::ostream& operator<<(std::ostream& os,const Equation& e);
     friend std::istream& operator>>(std::istream& is, Equation& e);
     friend Equation& operator!(const Equation& e);
     friend Equation& operator^(const Equation &e, float y);
+    Equation& operator=(const Equation& e);
 //Alte Metode
     double f_degree();
     solutii s_degree();
